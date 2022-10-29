@@ -6,7 +6,7 @@ use Carbon\Carbon as BaseCarbon;
 use Carbon\CarbonImmutable as BaseCarbonImmutable;
 use Illuminate\Support\Traits\Conditionable;
 
-class CarbonImmutable extends BaseCarbon
+class CarbonImmutable extends BaseCarbonImmutable
 {
     use Conditionable;
 
