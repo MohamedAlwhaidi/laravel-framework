@@ -82,6 +82,22 @@ class DateFacadeTest extends TestCase
         DateFactory::use(Carbon::class);
     }
 
+    public function testUsingSupportCarbonImmutable()
+    {
+        Date::use(\Illuminate\Support\CarbonImmutable::class);
+
+        $now = Date::now();
+
+        $this->assertTrue($now instanceof  \Illuminate\Support\CarbonImmutable);
+        $this->assertFalse($now->isMutable());
+        $this->assertNotSame($now, $now->when(true, function (CarbonImmutable $value) {
+            return $value->addDay();
+        }));
+        $this->assertSame($now, $now->when(false, function (CarbonImmutable $value) {
+            return $value->addDay();
+        }));
+    }
+
     public function testUseInvalidHandler()
     {
         $this->expectException(InvalidArgumentException::class);
